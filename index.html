@@ -3,369 +3,374 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Central Dashboard</title>
+  <title>TitanCore Holdings | Central Dashboard</title>
   <style>
-    :root{
-      --bg:#000000;
-      --panel:#050505;
-      --green:#16b84d;
-      --yellow:#d6aa10;
-      --white:#ffffff;
-      --line:#1b1b1b;
-      --shadow:0 0 0 1px rgba(255,255,255,0.03), 0 10px 28px rgba(0,0,0,.35);
-      --radius:18px;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--white);
-      font-family:Georgia, "Times New Roman", serif;
+    body {
+      font-family: Arial, sans-serif;
+      background: #070707;
+      color: #d4af37;
+      line-height: 1.5;
     }
 
-    .wrap{
-      max-width:1000px;
-      margin:0 auto;
-      padding:20px 16px 70px;
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
-    .mini-brand{
-      font-size:28px;
-      color:#fff;
-      margin-bottom:8px;
+    .topbar {
+      background: #0f0f0f;
+      border-bottom: 2px solid #1f7a1f;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    .main-title{
-      margin:0 0 8px;
-      color:var(--green);
-      font-size:56px;
-      line-height:1;
-      font-weight:700;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
 
-    .sub-title{
-      margin:0 0 18px;
-      color:#fff;
-      font-size:28px;
+    .logo-box {
+      width: 58px;
+      height: 58px;
+      border: 2px solid #d4af37;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1f7a1f;
+      font-weight: bold;
+      background: #111;
     }
 
-    .top-box{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow:var(--shadow);
-      margin-bottom:26px;
+    .brand-text h1 {
+      color: #1f7a1f;
+      font-size: 1.9rem;
+      margin-bottom: 4px;
     }
 
-    .label{
-      color:var(--green);
-      font-size:22px;
-      font-weight:700;
-      margin:10px 0 4px;
+    .brand-text p {
+      font-size: 0.95rem;
+      color: #d4af37;
     }
 
-    .value{
-      color:#fff;
-      font-size:22px;
-      margin:0 0 4px;
+    .time-box {
+      border: 1px solid #d4af37;
+      border-radius: 12px;
+      padding: 10px 14px;
+      background: #101010;
+      min-width: 210px;
+      text-align: right;
     }
 
-    .section{
-      margin-top:30px;
+    .time-box .label {
+      color: #1f7a1f;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    .section-title{
-      color:var(--green);
-      font-size:42px;
-      margin:0 0 14px;
-      font-weight:700;
+    .time-box .clock {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: 4px;
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:16px;
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      background: #0b0b0b;
     }
 
-    .card{
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:18px;
-      box-shadow:var(--shadow);
+    .nav a {
+      display: inline-block;
+      padding: 10px 14px;
+      border: 1px solid #d4af37;
+      border-radius: 10px;
+      background: #151515;
+      color: #d4af37;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
     }
 
-    .card-title{
-      font-size:32px;
-      color:#fff;
-      margin:0 0 8px;
-      font-weight:700;
+    .nav a:hover {
+      background: #1f7a1f;
+      color: #fff;
+      border-color: #1f7a1f;
     }
 
-    .card-desc{
-      font-size:21px;
-      color:#fff;
-      margin:0 0 16px;
+    .hero {
+      padding: 26px 24px 10px;
     }
 
-    .open-btn{
-      display:inline-block;
-      text-decoration:none;
-      background:var(--yellow);
-      color:#000;
-      border-radius:14px;
-      padding:11px 16px;
-      font-size:18px;
-      font-weight:700;
-      box-shadow:var(--shadow);
-      transition:.18s ease;
+    .hero-card {
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      background: linear-gradient(180deg, #111, #0a0a0a);
+      border-radius: 18px;
+      padding: 22px;
     }
 
-    .open-btn:hover{
-      background:var(--green);
-      color:#000;
+    .hero-card h2 {
+      color: #1f7a1f;
+      font-size: 1.6rem;
+      margin-bottom: 8px;
     }
 
-    .footer-space{
-      height:30px;
+    .hero-card p {
+      color: #d4af37;
+      max-width: 900px;
     }
 
-    @media (max-width:800px){
-      .grid{
-        grid-template-columns:1fr;
+    .wrapper {
+      padding: 24px;
+      display: grid;
+      gap: 24px;
+    }
+
+    .section {
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      border-radius: 18px;
+      background: #0d0d0d;
+      padding: 22px;
+    }
+
+    .section h3 {
+      color: #1f7a1f;
+      font-size: 1.35rem;
+      margin-bottom: 6px;
+    }
+
+    .section-desc {
+      color: #d4af37;
+      margin-bottom: 18px;
+      font-size: 0.95rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 16px;
+      background: #131313;
+      padding: 18px;
+      min-height: 170px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card h4 {
+      color: #1f7a1f;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.92rem;
+      color: #d4af37;
+      margin-bottom: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      text-align: center;
+      padding: 10px 12px;
+      border: 1px solid #d4af37;
+      border-radius: 10px;
+      background: #1a1a1a;
+      color: #d4af37;
+      font-weight: bold;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #1f7a1f;
+      color: #fff;
+      border-color: #1f7a1f;
+    }
+
+    .footer {
+      padding: 20px 24px 30px;
+      color: #b9982f;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
       }
-    }
 
-    @media (max-width:640px){
-      .main-title{font-size:38px}
-      .sub-title{font-size:21px}
-      .section-title{font-size:32px}
-      .card-title{font-size:26px}
-      .card-desc{font-size:19px}
-      .label,.value{font-size:19px}
+      .time-box {
+        text-align: left;
+        min-width: 100%;
+      }
+
+      .brand-text h1 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="mini-brand">TC</div>
-    <h1 class="main-title">Central Dashboard</h1>>
-  <div class="sub-title">Master Control Center • Leadership • Executive • System • Companies</div>
-
-    <div class="top-box">
-      <div class="label">System Time</div>
-      <div class="value" id="currentDate">Sun, Mar 22, 2026</div>
-      <div class="value" id="currentTime">18:00:00</div>
-
-      <div class="label">Mode</div>
-      <div class="value">CEO</div>
-
-      <div class="label">Status</div>
-      <div class="value">Active</div>
-
-      <div class="label">Menu</div>
-      <div class="value">Leadership • Executive • System • Companies</div>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo-box">TCH</div>
+      <div class="brand-text">
+        <h1>TitanCore Holdings</h1>
+        <p>Central Dashboard Command Center</p>
+      </div>
     </div>
 
+    <div class="time-box">
+      <div class="label">Central Time Panel</div>
+      <div class="clock" id="clock">Loading date & time...</div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <a href="#leadership">Leadership</a>
+    <a href="#executive">Executive</a>
+    <a href="#departments">Central Departments</a>
+    <a href="#systems">Operational Systems</a>
+    <a href="#companies">Companies</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-card">
+      <h2>Central Dashboard</h2>
+      <p>
+        This is the main command center for TitanCore Holdings. It is built to show
+        leadership structure, executive structure, central departments, operational systems,
+        and all connected company dashboards in one place.
+      </p>
+    </div>
+  </section>
+
+  <main class="wrapper">
     <section class="section" id="leadership">
-      <h2 class="section-title">Leadership</h2>
+      <h3>Leadership</h3>
+      <p class="section-desc">Mantle of 7 — high-level leadership structure.</p>
       <div class="grid">
-        <div class="card">
-          <div class="card-title">CEO</div>
-          <div class="card-desc">Executive authority • final sign</div>
-          <a class="open-btn" href="ceo.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">President</div>
-          <div class="card-desc">Operations governance</div>
-          <a class="open-btn" href="president.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Vice President</div>
-          <div class="card-desc">Programs • execution</div>
-          <a class="open-btn" href="vice-president.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Director</div>
-          <div class="card-desc">Department direction • enterprise oversight</div>
-          <a class="open-btn" href="director.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Assistant Director</div>
-          <div class="card-desc">Deputy direction • department support</div>
-          <a class="open-btn" href="assistant-director.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Chief of Staff</div>
-          <div class="card-desc">Chief coordination • 10 chief branches</div>
-          <a class="open-btn" href="chief-of-staff.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Executive Advisor</div>
-          <div class="card-desc">Strategic counsel • executive advisory</div>
-          <a class="open-btn" href="executive-advisor.html">Open Dashboard</a>
-        </div>
+        <div class="card"><h4>Chief Executive Officer</h4><p>The throne of origin, authority, and final decision.</p><a class="btn" href="#">Open Role View</a></div>
+        <div class="card"><h4>President</h4><p>Strategic leadership and high-level counsel inside the Mantle.</p><a class="btn" href="#">Open Role View</a></div>
+        <div class="card"><h4>Vice President</h4><p>Bridge of operations, support, and executive continuity.</p><a class="btn" href="#">Open Role View</a></div>
+        <div class="card"><h4>Director</h4><p>Oversight, alignment, and internal visual command.</p><a class="btn" href="#">Open Role View</a></div>
+        <div class="card"><h4>Assistant Director</h4><p>Coordination, precision, and cross-unit support.</p><a class="btn" href="#">Open Role View</a></div>
+        <div class="card"><h4>Chief of Staff</h4><p>Order, follow-through, and execution across systems.</p><a class="btn" href="#">Open Role View</a></div>
+        <div class="card"><h4>Executive Advisor</h4><p>Wisdom, counsel, and strategic advisory insight.</p><a class="btn" href="#">Open Role View</a></div>
       </div>
     </section>
 
     <section class="section" id="executive">
-      <h2 class="section-title">Executive</h2>
+      <h3>Executive</h3>
+      <p class="section-desc">General network-wide executive command roles.</p>
       <div class="grid">
-        <div class="card">
-          <div class="card-title">General Manager</div>
-          <div class="card-desc">Oversight • cross-company</div>
-          <a class="open-btn" href="general-manager.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">General Assistant Manager</div>
-          <div class="card-desc">Support • execution</div>
-          <a class="open-btn" href="general-assistant-manager.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">General Administrator</div>
-          <div class="card-desc">Admin • logging • records</div>
-          <a class="open-btn" href="general-administrator.html">Open Dashboard</a>
-        </div>
+        <div class="card"><h4>General Manager</h4><p>Group-wide operational management and command execution.</p><a class="btn" href="#">Open Executive View</a></div>
+        <div class="card"><h4>General Assistant Manager</h4><p>Executive support and operational balancing across the network.</p><a class="btn" href="#">Open Executive View</a></div>
+        <div class="card"><h4>General Administrator</h4><p>Administrative structure, coordination, and system order.</p><a class="btn" href="#">Open Executive View</a></div>
       </div>
     </section>
 
-    <section class="section" id="system">
-      <h2 class="section-title">System</h2>
+    <section class="section" id="departments">
+      <h3>Central Departments</h3>
+      <p class="section-desc">Future-ready human structure that can work with AI now and real staff later.</p>
       <div class="grid">
-        <div class="card">
-          <div class="card-title">Contact</div>
-          <div class="card-desc">Communication routing</div>
-          <a class="open-btn" href="contact.html">Open Dashboard</a>
-        </div>
+        <div class="card"><h4>Contact Department</h4><p>Handles inquiries, intake, and contact management structure.</p><a class="btn" href="#">Open Department</a></div>
+        <div class="card"><h4>Contract Department</h4><p>Handles contract preparation, review, and routing structure.</p><a class="btn" href="#">Open Department</a></div>
+        <div class="card"><h4>Email Routing Department</h4><p>Controls message flow, internal routing, and distribution logic.</p><a class="btn" href="#">Open Department</a></div>
+        <div class="card"><h4>Report Department</h4><p>Collects updates, summaries, logs, and reporting structure.</p><a class="btn" href="#">Open Department</a></div>
+        <div class="card"><h4>Approval Department</h4><p>Handles review layers, signoff flow, and release checkpoints.</p><a class="btn" href="#">Open Department</a></div>
+        <div class="card"><h4>Omni Operations Department</h4><p>Supports full-spectrum oversight and network command coordination.</p><a class="btn" href="#">Open Department</a></div>
+        <div class="card"><h4>Tax Network Department</h4><p>Tax filing, compliance, lender pack, and jurisdiction structure.</p><a class="btn" href="#">Open Department</a></div>
+        <div class="card"><h4>AI Operations Department</h4><p>AI command, automation layers, agent structure, and workflow oversight.</p><a class="btn" href="#">Open Department</a></div>
+        <div class="card"><h4>Public Portal Department</h4><p>Public-facing content, access, and outside presentation structure.</p><a class="btn" href="#">Open Department</a></div>
+        <div class="card"><h4>Finance Department</h4><p>Financial oversight, reporting, allocation, and performance structure.</p><a class="btn" href="#">Open Department</a></div>
+      </div>
+    </section>
 
-        <div class="card">
-          <div class="card-title">Contract</div>
-          <div class="card-desc">Contract command</div>
-          <a class="open-btn" href="contract.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Email Routing</div>
-          <div class="card-desc">Mail direction • inbox flow</div>
-          <a class="open-btn" href="email-routing.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Report</div>
-          <div class="card-desc">Reports • logs • summaries</div>
-          <a class="open-btn" href="report.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Approval</div>
-          <div class="card-desc">Approval command</div>
-          <a class="open-btn" href="approval.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Omni System</div>
-          <div class="card-desc">Master operations layer</div>
-          <a class="open-btn" href="omni-system.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Tax Network</div>
-          <div class="card-desc">Tax activity and compliance</div>
-          <a class="open-btn" href="tax-network.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Agent A.I. Suite</div>
-          <div class="card-desc">AI operations and task flow</div>
-          <a class="open-btn" href="agent-ai-suite.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Public Portal</div>
-          <div class="card-desc">Public forms and access</div>
-          <a class="open-btn" href="public-portal.html">Open Dashboard</a>
-        </div>
-
-        <div class="card">
-          <div class="card-title">Finance</div>
-          <div class="card-desc">Financial command and tracking</div>
-          <a class="open-btn" href="finance.html">Open Dashboard</a>
-        </div>
+    <section class="section" id="systems">
+      <h3>Operational Systems</h3>
+      <p class="section-desc">AI-powered systems and tools that run the work behind the structure.</p>
+      <div class="grid">
+        <div class="card"><h4>Contact</h4><p>Communication intake, lead contact, and response system.</p><a class="btn" href="#">Open System</a></div>
+        <div class="card"><h4>Contract</h4><p>Contract generation, review flow, and handling system.</p><a class="btn" href="#">Open System</a></div>
+        <div class="card"><h4>Email Routing</h4><p>Internal and external mail routing logic and organization.</p><a class="btn" href="#">Open System</a></div>
+        <div class="card"><h4>Report</h4><p>Update reporting, file logs, summaries, and tracked submissions.</p><a class="btn" href="#">Open System</a></div>
+        <div class="card"><h4>Approval</h4><p>Approval queue, review stages, and release authorization system.</p><a class="btn" href="#">Open System</a></div>
+        <div class="card"><h4>Omni System</h4><p>Central intelligence layer for network-wide coordination and control.</p><a class="btn" href="#">Open System</a></div>
+        <div class="card"><h4>Tax Network</h4><p>Tax command tools, lender packs, scans, summaries, and proof uploads.</p><a class="btn" href="#">Open System</a></div>
+        <div class="card"><h4>Agent A.I. Suite</h4><p>AI agents, automation logic, and operational intelligence modules.</p><a class="btn" href="#">Open System</a></div>
+        <div class="card"><h4>Public Portal</h4><p>Public-facing access layer, visibility flow, and network presentation.</p><a class="btn" href="#">Open System</a></div>
+        <div class="card"><h4>Finance</h4><p>Central finance tools, tracking, overview panels, and reports.</p><a class="btn" href="#">Open System</a></div>
       </div>
     </section>
 
     <section class="section" id="companies">
-      <h2 class="section-title">Companies</h2>
+      <h3>Companies</h3>
+      <p class="section-desc">Connected company dashboards inside the TitanCore ecosystem.</p>
       <div class="grid">
         <div class="card">
-          <div class="card-title">TitanCore Holdings</div>
-          <div class="card-desc">Father company • governance</div>
-          <a class="open-btn" href="titancore.html">Open Dashboard</a>
+          <h4>TitanCore Holdings</h4>
+          <p>Parent company dashboard and central authority view.</p>
+          <a class="btn" href="titancore.html">Open Company Dashboard</a>
         </div>
 
         <div class="card">
-          <div class="card-title">Vaultara Capital</div>
-          <div class="card-desc">Investments • funding</div>
-          <a class="open-btn" href="vaultara.html">Open Dashboard</a>
+          <h4>Vaultara Capital</h4>
+          <p>Funding, credit, and business formation dashboard.</p>
+          <a class="btn" href="vaultara.html">Open Company Dashboard</a>
         </div>
 
         <div class="card">
-          <div class="card-title">VitalPath Care Group</div>
-          <div class="card-desc">Healthcare • care operations</div>
-          <a class="open-btn" href="vitalpath.html">Open Dashboard</a>
+          <h4>Family First Equity Group</h4>
+          <p>Sell, buy, and property management dashboard.</p>
+          <a class="btn" href="familyfirst.html">Open Company Dashboard</a>
         </div>
 
         <div class="card">
-          <div class="card-title">RevMotion Auto &amp; Marine</div>
-          <div class="card-desc">Auto • marine • service</div>
-          <a class="open-btn" href="revmotion.html">Open Dashboard</a>
+          <h4>VitalPath Care Group</h4>
+          <p>Care operations, intake, and service workflow dashboard.</p>
+          <a class="btn" href="vitalpath.html">Open Company Dashboard</a>
         </div>
 
         <div class="card">
-          <div class="card-title">Family First Equity Group</div>
-          <div class="card-desc">Real estate • equity</div>
-          <a class="open-btn" href="familyfirst.html">Open Dashboard</a>
+          <h4>RevMotion Auto &amp; Marine Group</h4>
+          <p>Auto and marine services, workflow, and quote dashboard.</p>
+          <a class="btn" href="revmotion.html">Open Company Dashboard</a>
         </div>
       </div>
     </section>
+  </main>
 
-    <div class="footer-space"></div>
-  </div>
+  <footer class="footer">
+    TitanCore Holdings Central Dashboard — built for AI operations now and human expansion later.
+  </footer>
 
   <script>
     function updateClock() {
       const now = new Date();
-
-      const dateText = now.toLocaleDateString('en-US', {
-        weekday: 'short',
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
-      });
-
-      const timeText = now.toLocaleTimeString('en-US', {
-        hour12: false,
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      });
-
-      document.getElementById('currentDate').textContent = dateText;
-      document.getElementById('currentTime').textContent = timeText;
+      const text = now.toLocaleString();
+      document.getElementById('clock').textContent = text;
     }
-
     updateClock();
     setInterval(updateClock, 1000);
   </script>
