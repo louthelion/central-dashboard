@@ -365,13 +365,13 @@
 
   <section class="section">
     <h2>Companies</h2>
-    <p class="section-desc">Company-level workflow, submission, review, and signing stages.</p>
+    <p class="section-desc">Company dashboards open directly.</p>
     <div class="grid">
-      <div class="card"><h3>TitanCore Holdings</h3><p>TitanCore company review layer, correction returns, signing stage, and send-to-CEO flow.</p><button class="btn" onclick="openPanel('TitanCore Holdings Dashboard','TitanCore company leadership reviews work received from subsidiaries.', titancoreCompanyModules, titancoreCompanyStatus)">Open Dashboard</button></div>
-      <div class="card"><h3>Vaultara Capital</h3><p>Department completion, company sign stage, and send-to-TitanCore workflow.</p><button class="btn" onclick="openPanel('Vaultara Capital Dashboard','Company leadership receives completed department work, signs, and sends to TitanCore.', companyWorkflowModules, companyWorkflowStatus)">Open Dashboard</button></div>
-      <div class="card"><h3>Family First Equity Group</h3><p>Department completion, company sign stage, and send-to-TitanCore workflow.</p><button class="btn" onclick="openPanel('Family First Equity Group Dashboard','Company leadership receives completed department work, signs, and sends to TitanCore.', companyWorkflowModules, companyWorkflowStatus)">Open Dashboard</button></div>
-      <div class="card"><h3>VitalPath Care Group</h3><p>Department completion, company sign stage, and send-to-TitanCore workflow.</p><button class="btn" onclick="openPanel('VitalPath Care Group Dashboard','Company leadership receives completed department work, signs, and sends to TitanCore.', companyWorkflowModules, companyWorkflowStatus)">Open Dashboard</button></div>
-      <div class="card"><h3>RevMotion Auto &amp; Marine</h3><p>Department completion, company sign stage, and send-to-TitanCore workflow.</p><button class="btn" onclick="openPanel('RevMotion Auto & Marine Dashboard','Company leadership receives completed department work, signs, and sends to TitanCore.', companyWorkflowModules, companyWorkflowStatus)">Open Dashboard</button></div>
+      <div class="card"><h3>TitanCore Holdings</h3><p>Go straight to the TitanCore company dashboard.</p><button class="btn" onclick="window.location.href='titancore.html'">Open Dashboard</button></div>
+      <div class="card"><h3>Vaultara Capital</h3><p>Go straight to the Vaultara company dashboard.</p><button class="btn" onclick="window.location.href='vaultara.html'">Open Dashboard</button></div>
+      <div class="card"><h3>Family First Equity Group</h3><p>Go straight to the Family First company dashboard.</p><button class="btn" onclick="window.location.href='familyfirst.html'">Open Dashboard</button></div>
+      <div class="card"><h3>VitalPath Care Group</h3><p>Go straight to the VitalPath company dashboard.</p><button class="btn" onclick="window.location.href='vitalpath.html'">Open Dashboard</button></div>
+      <div class="card"><h3>RevMotion Auto &amp; Marine</h3><p>Go straight to the RevMotion company dashboard.</p><button class="btn" onclick="window.location.href='revmotion.html'">Open Dashboard</button></div>
     </div>
   </section>
 
@@ -404,21 +404,21 @@
     const oversightModules = [
       ["Email", "Role inbox and oversight communication"],
       ["Meetings", "Meeting schedule and session logs"],
-      ["Reports Received", "Reports sent upward for review"],
+      ["Reports", "Reports sent upward for review"],
       ["Recommendations", "Advice, notes, and recommendation work"],
       ["Company Status", "High-level company performance view"],
       ["Workflow Tracking", "See what stage work is in"],
-      ["Activity Review", "Oversight activity and monitoring"]
+      ["Activity", "Oversight activity and monitoring"]
     ];
 
     const generalModules = [
       ["Email", "General executive inbox and coordination"],
       ["Meetings", "Weekly meeting cycle and schedule"],
-      ["Reports Intake", "Reports received from TitanCore"],
+      ["Reports", "Reports received from TitanCore"],
       ["Oversight Logs", "Tracked company and system status"],
-      ["Recommendation Flow", "Recommendations sent downward"],
+      ["Recommendations", "Recommendations sent downward"],
       ["Workflow Tracking", "See package and report movement"],
-      ["Activity Review", "Executive observation and records"]
+      ["Activity", "Executive observation and records"]
     ];
 
     const ceoModules = [
@@ -451,26 +451,6 @@
       ["Status", "Connection and health state"]
     ];
 
-    const companyWorkflowModules = [
-      ["Department Intake", "Completed work received from departments"],
-      ["Department Approval Check", "Manager + assistant manager review stage"],
-      ["Company Sign Stage", "Manager + assistant manager + administrator stage"],
-      ["Correction Return", "Returned items sent back for fixes"],
-      ["Send to TitanCore", "Forward completed work to TitanCore"],
-      ["Workflow Tracking", "See package stage and movement"],
-      ["Status", "Company readiness and queue state"]
-    ];
-
-    const titancoreCompanyModules = [
-      ["Received From Companies", "Packages received from subsidiaries"],
-      ["TitanCore Department Review", "All TitanCore departments review work"],
-      ["Correction Return", "Send items back to company if needed"],
-      ["TitanCore Sign Stage", "TitanCore manager + assistant manager + administrator"],
-      ["Send to CEO", "Forward ready work for final CEO sign"],
-      ["Workflow Tracking", "See package stage and movement"],
-      ["Status", "TitanCore review and queue state"]
-    ];
-
     const chiefOfStaffModules = [
       ["Email", "Chief of Staff inbox and communication flow"],
       ["Meetings", "Chief of Staff meeting schedule and logs"],
@@ -481,7 +461,7 @@
     ];
 
     const chiefModules = [
-      ["Home Dashboard", "Chief home view and assigned branch summary"],
+      ["Home", "Chief home view and assigned branch summary"],
       ["Work Area", "Main work area for this Chief branch"],
       ["Reports", "Updates and reporting to Chief of Staff"],
       ["Activity", "Tracked work activity and status"],
@@ -511,16 +491,6 @@
     const systemStatus = [
       "This dashboard shows system structure and tool areas only.",
       "Live data, queues, logs, and settings will appear after Microsoft and backend connections are added."
-    ];
-
-    const companyWorkflowStatus = [
-      "Company leadership sign rule: normal = all 3 sign. Exception = 2 of 3 only if 1 signer is officially unavailable.",
-      "After company sign stage, work is sent to TitanCore for review."
-    ];
-
-    const titancoreCompanyStatus = [
-      "TitanCore leadership sign rule: normal = all 3 sign. Exception = 2 of 3 only if 1 signer is officially unavailable.",
-      "After TitanCore sign stage, work goes to CEO for final sign."
     ];
 
     const chiefOfStaffStatus = [
@@ -557,7 +527,7 @@
 
         const btn = document.createElement("button");
         btn.className = "btn";
-        btn.textContent = "Open " + item[0];
+        btn.textContent = item[0];
 
         const msg = document.createElement("div");
         msg.className = "mini-msg";
@@ -635,7 +605,7 @@
 
         const btn = document.createElement("button");
         btn.className = "btn";
-        btn.textContent = "Open Chief " + i;
+        btn.textContent = "Chief " + i;
         btn.onclick = function() {
           openChief(i);
         };
@@ -696,8 +666,8 @@
         const text = btn.textContent || "";
         const msg = btn.parentElement.querySelector(".mini-msg");
 
-        if (text.indexOf("Open Chief ") === 0) {
-          const number = parseInt(text.replace("Open Chief ", ""), 10);
+        if (text.indexOf("Chief ") === 0) {
+          const number = parseInt(text.replace("Chief ", ""), 10);
           btn.onclick = function() {
             openChief(number);
           };
