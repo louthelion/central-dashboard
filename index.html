@@ -2,68 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Central Dashboard Login</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Central Dashboard ­— Login</title>
+
+  <!-- ───────── BRAND COLORS (edit only these) ────────── -->
   <style>
-    :root{--bg:#000;--panel:#0e0e0e;--border:#d4af37;--accent:#18c25c;--txt:#f1df9a}
-    *{box-sizing:border-box;margin:0;padding:0;font-family:Arial, sans-serif}
-    body{min-height:100vh;display:flex;justify-content:center;align-items:center;
-         background:radial-gradient(circle at top,rgba(24,194,92,.08),transparent 25%),#000}
-    .card{width:min(440px,100%);background:var(--panel);border:1px solid var(--border);
-          border-radius:28px;padding:32px 28px 24px;box-shadow:0 0 26px rgba(24,194,92,.10)}
-    .logo{width:88px;height:88px;margin:0 auto 22px;border-radius:22px;border:1px solid var(--border);
-          display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:2rem;font-weight:700}
-    h1{color:var(--accent);text-align:center;font-size:1.8rem;margin-bottom:24px}
-    label{display:block;margin-bottom:6px;color:var(--txt);font-size:.94rem}
-    input{width:100%;padding:14px;border:1px solid var(--border);border-radius:16px;background:#090909;
-          color:#fff;font-size:1rem;margin-bottom:16px}
-    input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(24,194,92,.15)}
-    button{width:100%;padding:14px;border:none;border-radius:999px;background:var(--border);
-           color:#000;font-weight:bold;font-size:1rem;cursor:pointer;transition:.2s}
-    button:hover{background:var(--accent);color:#fff}
-    .links{margin-top:14px;text-align:center;font-size:.88rem}
-    .links a{color:var(--accent);text-decoration:none;margin:0 6px}
-    .links a:hover{text-decoration:underline}
-    .msg{margin-top:16px;text-align:center;color:var(--accent);min-height:20px;font-size:.9rem}
+  :root{
+    --accent: #1dc25c;     /* bright green borders & lines  */
+    --accent-soft:#d4af37; /* gold buttons / emphasis text */
+    --text:  #ffffff;
+    --bg:    #000000;
+  }
+  </style>
+
+  <!-- ───────── LAYOUT & ELEMENT STYLES ────────── -->
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,Segoe UI,Arial,sans-serif}
+    body{background:var(--bg);color:var(--text);display:flex;min-height:100vh}
+    .wrapper{margin:auto;display:flex;flex-wrap:wrap;max-width:920px;border:3px solid var(--accent)}
+    .left,.right{flex:1 1 300px;padding:2.5rem}
+    .left{border-right:3px solid var(--accent)}
+    h1{font-size:clamp(2rem,5vw,2.8rem);margin-bottom:.75rem}
+    h2{font-size:1.1rem;font-weight:400;color:var(--accent-soft);margin-bottom:2rem;text-transform:uppercase}
+    label{display:block;font-size:.9rem;margin:.85rem 0 .35rem}
+    input{width:100%;padding:.8rem 1rem;border:2px solid var(--accent);background:transparent;color:var(--text);border-radius:.35rem}
+    button{margin-top:2rem;width:100%;padding:.9rem;border:none;border-radius:2rem;background:var(--accent-soft);color:var(--bg);font-weight:600;font-size:1.05rem;cursor:pointer}
+    a{color:var(--accent-soft);font-size:.85rem;text-decoration:none}
+    a:hover{text-decoration:underline}
+    /*  mobile  */
+    @media(max-width:680px){.left{border-right:none;border-bottom:3px solid var(--accent)}}
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="logo">CD</div>
-    <h1>Central&nbsp;Dashboard</h1>
 
-    <form id="login">
-      <label for="user">Email</label>
-      <input id="user" type="email" placeholder="you@company.com" autocomplete="username" />
+  <main class="wrapper">
+    <!-- ––––––––––– LEFT COLUMN ––––––––––– -->
+    <section class="left">
+        <h1>Central Dashboard</h1>
+        <h2>Secure Login</h2>
 
-      <label for="pass">Password</label>
-      <input id="pass" type="password" placeholder="Password" autocomplete="current-password" />
+        <form>
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="name@titancoreholdings.com" required>
 
-      <button type="submit">Login</button>
+          <label for="pw">Password</label>
+          <input id="pw" type="password" placeholder="Password" required>
 
-      <div class="links">
-  <a href="https://passwordreset.microsoftonline.com/" target="_blank">
-    Forgot password?
-  </a> •
-  <a href="mailto:support@titancoreholdings.com?subject=Need%20my%20dashboard%20email">
-    Forgot email?
-  </a>
-</div>
-  <div class="msg" id="msg"></div>
-    </form>
-  </div>
- <script>
-    const dashboardPage = "central-dashboard.html";          // real dashboard file
+          <button type="submit">Login</button>
+        </form>
 
-    document.getElementById("login").addEventListener("submit",e=>{
-      e.preventDefault();
-      const email=document.getElementById("user").value.trim();
-      const pass =document.getElementById("pass").value.trim();
-      const msg  =document.getElementById("msg");
-      if(!email||!pass){msg.textContent="Enter email and password.";return;}
-      msg.textContent="Signing in…";
-      setTimeout(()=>location.href=dashboardPage,600);        // fake redirect
-    });
-  </script>
+        <p style="margin-top:1rem">
+          <a href="#">Forgot password?</a> ·
+          <a href="#">Forgot email?</a>
+        </p>
+    </section>
+
+    <!-- ––––––––––– RIGHT COLUMN ––––––––––– -->
+    <aside class="right">
+        <h1 style="font-size:2.25rem;margin-bottom:1.2rem">Titan Core Holdings</h1>
+        <p style="line-height:1.55">
+          Multi-company command center providing cross-entity finance, tax &
+          operations oversight.<br><br>
+          Access is restricted to authorized Titan Core executives and
+          system administrators.
+        </p>
+    </aside>
+  </main>
+
 </body>
 </html>
