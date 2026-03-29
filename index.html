@@ -1,232 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Central Dashboard Login</title>
-  <style>
-    :root{
-      --bg:#000000;
-      --panel:#060606;
-      --green:#18c25c;
-      --gold:#d4af37;
-      --white:#ffffff;
-      --muted:#bdbdbd;
-    }
-
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-      font-family:Arial, Helvetica, sans-serif;
-    }
-
-    body{
-      background:var(--bg);
-      color:var(--white);
-      min-height:100vh;
-      padding:20px 14px;
-    }
-
-    .page{
-      width:min(1220px, 100%);
-      margin:0 auto;
-    }
-
-    .page-title{
-      font-size:clamp(2rem, 4vw, 3.4rem);
-      font-weight:800;
-      color:var(--green);
-      margin-bottom:18px;
-    }
-
-    .shell{
-      border:2px solid var(--green);
-      border-radius:22px;
-      background:var(--panel);
-      overflow-x:auto;
-    }
-
-    .shell-inner{
-      min-width:820px;
-      display:grid;
-      grid-template-columns:360px 1fr;
-      gap:36px;
-      padding:30px 28px;
-      align-items:center;
-    }
-
-    .left{
-      padding:8px 4px;
-    }
-
-    .login-title{
-      font-size:2.5rem;
-      font-weight:800;
-      color:var(--gold);
-      margin-bottom:24px;
-      line-height:1;
-    }
-
-    .field{
-      margin-bottom:18px;
-    }
-
-    .field label{
-      display:block;
-      font-size:1rem;
-      font-weight:700;
-      color:var(--white);
-      margin-bottom:8px;
-    }
-
-    .field input{
-      width:100%;
-      padding:16px 14px;
-      border:2px solid var(--green);
-      border-radius:16px;
-      background:#000;
-      color:#fff;
-      font-size:1rem;
-      outline:none;
-    }
-
-    .field input::placeholder{
-      color:#7b7b7b;
-    }
-
-    .field input:focus{
-      border-color:var(--gold);
-    }
-
-    .login-btn{
-      width:100%;
-      margin-top:8px;
-      padding:17px 14px;
-      border:none;
-      border-radius:999px;
-      background:var(--gold);
-      color:#000;
-      font-size:1.08rem;
-      font-weight:800;
-      cursor:pointer;
-    }
-
-    .login-btn:hover{
-      background:var(--green);
-      color:#000;
-    }
-
-    .helper{
-      margin-top:16px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      font-size:.95rem;
-    }
-
-    .helper a{
-      color:var(--gold);
-      text-decoration:none;
-    }
-
-    .helper a:hover{
-      text-decoration:underline;
-    }
-
-    .status{
-      min-height:22px;
-      margin-top:12px;
-      color:var(--green);
-      font-size:.92rem;
-    }
-
-    .right{
-      padding:8px 4px;
-    }
-
-    .desc{
-      font-size:1.12rem;
-      line-height:1.8;
-      color:var(--white);
-      max-width:620px;
-    }
-
-    .desc .note{
-      display:block;
-      margin-top:20px;
-      color:var(--muted);
-      font-size:.98rem;
-      line-height:1.6;
-    }
-  </style>
+<meta charset="utf-8">
+<title>Central Dashboard – ALL-IN-ONE</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{
+  --bg:#000; --fg:#fff;
+  --accent:#18c25c;           /* green */
+  --accent-soft:#18c25c33;
+  --gold:#c9a334;
+  --radius:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:16px/1.45 system-ui,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--fg);display:flex;flex-direction:column;min-height:100vh}
+header{padding:1.4rem 1rem;text-align:center;border-bottom:1px solid #222}
+h1{font-size:2.4rem;font-weight:700;color:var(--accent)}
+nav{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin:1rem 0}
+nav button{background:none;color:var(--accent);border:1px solid var(--accent);
+  padding:.45rem .9rem;border-radius:var(--radius);cursor:pointer;font-size:.88rem}
+nav button.active,nav button:hover{background:var(--accent-soft)}
+section{display:none;padding:1rem 1rem 3rem;max-width:1000px;margin:auto}
+section.active{display:block}
+section h2{font-size:1.6rem;margin-bottom:.7rem;color:var(--gold)}
+p{margin:.7rem 0}
+footer{margin-top:auto;padding:1rem;text-align:center;font-size:.75rem;color:#888;border-top:1px solid #222}
+</style>
 </head>
 <body>
-  <div class="page">
-    <div class="page-title">Central Dashboard</div>
 
-    <div class="shell">
-      <div class="shell-inner">
-        <div class="left">
-          <div class="login-title">Login</div>
+<header><h1>Central Dashboard</h1></header>
 
-          <form id="loginForm">
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" type="email" placeholder="name@titancoreholdings.com" required>
-            </div>
+<!----- master nav bar – edit titles only ----->
+<nav>
+  <button class="tab active" data-pane="home">Home</button>
+  <button class="tab" data-pane="radar">Portfolio Radar</button>
+  <button class="tab" data-pane="tax">Tax Status</button>
+  <button class="tab" data-pane="public">Public Portal</button>
+  <button class="tab" data-pane="agent">Agent Suite</button>
+  <button class="tab" data-pane="vaultara">Vaultara Capital</button>
+  <button class="tab" data-pane="contracts">Contracts</button>
+  <button class="tab" data-pane="omni">Omni System</button>
+  <button class="tab" data-pane="asset">Asset Register</button>
+</nav>
 
-            <div class="field">
-              <label for="password">Password</label>
-              <input id="password" type="password" placeholder="Password" required>
-            </div>
+<!----- ONE PAGE, MANY SECTIONS ----->
+<section id="home"     class="active"><h2>Welcome</h2><p>TODO: dashboard overview.</p></section>
+<section id="radar">   <h2>Portfolio Risk Radar</h2><p>TODO: charts &amp; tables.</p></section>
+<section id="tax">     <h2>Tax Status</h2><p>TODO: tax-network grid.</p></section>
+<section id="public">  <h2>Public Portal</h2><p>TODO: public-facing docs.</p></section>
+<section id="agent">   <h2>Agent Suite</h2><p>TODO: approvals, workflow.</p></section>
+<section id="vaultara"><h2>Vaultara Capital</h2><p>TODO: credit-repair intake.</p></section>
+<section id="contracts"><h2>Contracts</h2><p>TODO: contract list / signer.</p></section>
+<section id="omni">    <h2>Omni System</h2><p>TODO: operational KPIs.</p></section>
+<section id="asset">   <h2>Asset Register</h2><p>TODO: asset ledger.</p></section>
 
-            <button type="submit" class="login-btn">Login</button>
+<footer>© TitanCore Holdings – internal use only</footer>
 
-            <div class="helper">
-              <a href="https://passwordreset.microsoftonline.com/" target="_blank" rel="noopener">Forgot password?</a>
-              <span>•</span>
-              <a href="mailto:helpdesk@titancoreholdings.com?subject=Need%20help%20with%20dashboard%20email">Forgot email?</a>
-            </div>
+<script>
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.pane).classList.add('active');
+  };
+});
+</script>
 
-            <div class="status" id="status"></div>
-          </form>
-        </div>
-
-        <div class="right">
-          <div class="desc">
-            Multi-company command center for reporting, oversight, tax review,
-            operational review, finance visibility, and executive access across
-            the full TitanCore network.
-
-            <span class="note">
-              Sign in to continue to the Central Dashboard.
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    document.getElementById("loginForm").addEventListener("submit", function(e){
-      e.preventDefault();
-
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const status = document.getElementById("status");
-
-      if(!email || !password){
-        status.textContent = "Enter your email and password.";
-        return;
-      }
-
-      status.textContent = "Opening dashboard...";
-
-      setTimeout(function(){
-        window.location.href = "central-dashboard.html";
-      }, 300);
-    });
-  </script>
 </body>
 </html>
