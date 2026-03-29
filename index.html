@@ -1,175 +1,427 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Central Dashboard – TitanCore</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<style>
-:root{
-  --bg:#050805;--panel:#0f130f;--brand:#18c25c;--gold:#d0a23a;--fg:#e9e9e9;
-  --radius:6px;font-family:system-ui,Segoe UI,Arial,sans-serif
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--fg);min-height:100vh;display:flex;flex-direction:column}
-header{display:flex;align-items:center;gap:.9rem;background:#143014;padding:1rem}
-header img{width:56px;height:auto}
-h1{font-size:1.8rem;font-weight:700}
-#clock{margin-left:auto;font-size:.9rem;font-weight:600}
-nav{display:flex;flex-wrap:wrap;gap:.6rem .9rem;padding:1rem;background:#101410;justify-content:center}
-nav button{
-  background:var(--gold);color:#000;padding:.55rem .95rem;border:none;
-  border-radius:var(--radius);font-weight:600;font-size:.86rem;cursor:pointer;transition:.2s filter
-}
-nav button:hover{filter:brightness(1.18)}
-section{display:none;padding:1.6rem;max-width:1200px;width:100%;margin:0 auto}
-section.active{display:block}
-.board{display:grid;gap:.8rem}
-.board button{
-  background:rgba(255,255,255,.06);padding:.85rem 1.1rem;border:1px solid #1f291f;
-  border-radius:var(--radius);text-align:left;color:var(--brand);font-size:1rem;font-weight:700;
-  cursor:pointer;transition:background .2s,transform .1s
-}
-.board button:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
-.detail{display:none;margin-top:1.2rem;background:var(--panel);padding:1.4rem;border-radius:var(--radius)}
-.detail h3{color:var(--gold);margin-bottom:.7rem}
-footer{margin-top:auto;padding:1rem;text-align:center;font-size:.75rem;color:#777}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Central Dashboard Login</title>
+  <style>
+    :root{
+      --bg:#000000;
+      --panel:#060606;
+      --green:#18c25c;
+      --gold:#d4af37;
+      --white:#ffffff;
+      --muted:#b8b8b8;
+      --border:rgba(24,194,92,0.9);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      background:var(--bg);
+      color:var(--white);
+      min-height:100vh;
+    }
+
+    .page{
+      width:min(1200px, 94%);
+      margin:24px auto;
+      border:3px solid var(--green);
+      background:var(--panel);
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:20px 24px;
+      border-bottom:2px solid var(--green);
+      flex-wrap:wrap;
+    }
+
+    .brand-side{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      min-width:280px;
+    }
+
+    .logo-slot{
+      width:72px;
+      height:72px;
+      border:2px solid var(--green);
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      background:#0a0a0a;
+      flex-shrink:0;
+    }
+
+    .logo-slot img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+    }
+
+    .logo-fallback{
+      color:var(--gold);
+      font-size:1.8rem;
+      font-weight:bold;
+    }
+
+    .main-title{
+      font-size:clamp(2rem, 4vw, 3.2rem);
+      font-weight:800;
+      color:var(--white);
+      line-height:1;
+    }
+
+    .nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      justify-content:flex-end;
+      align-items:center;
+      min-width:280px;
+    }
+
+    .nav-links button{
+      background:none;
+      border:none;
+      color:var(--green);
+      font-size:1rem;
+      cursor:pointer;
+      padding:2px 0;
+      text-decoration:none;
+    }
+
+    .nav-links button:hover,
+    .nav-links button.active{
+      color:var(--gold);
+      text-decoration:underline;
+    }
+
+    .content{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      min-height:560px;
+    }
+
+    .left-pane{
+      padding:40px 28px 30px;
+      border-right:2px solid var(--green);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .left-subtitle{
+      color:var(--gold);
+      font-size:1.2rem;
+      font-weight:700;
+      margin-bottom:34px;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+
+    .field{
+      margin-bottom:22px;
+    }
+
+    .field label{
+      display:block;
+      font-size:1rem;
+      font-weight:700;
+      margin-bottom:8px;
+      color:var(--white);
+    }
+
+    .field input{
+      width:100%;
+      border:2px solid var(--green);
+      border-radius:14px;
+      background:#000;
+      color:var(--white);
+      padding:18px 16px;
+      font-size:1rem;
+      outline:none;
+    }
+
+    .field input::placeholder{
+      color:#8b8b8b;
+    }
+
+    .field input:focus{
+      border-color:var(--gold);
+    }
+
+    .login-btn{
+      width:100%;
+      margin-top:18px;
+      padding:20px 18px;
+      border:none;
+      border-radius:40px;
+      background:var(--gold);
+      color:#000;
+      font-size:1.15rem;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .login-btn:hover{
+      background:var(--green);
+      color:#000;
+    }
+
+    .helper-links{
+      margin-top:22px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:.98rem;
+    }
+
+    .helper-links a{
+      color:var(--gold);
+      text-decoration:none;
+    }
+
+    .helper-links a:hover{
+      text-decoration:underline;
+    }
+
+    .dot{
+      color:var(--gold);
+    }
+
+    .message{
+      min-height:24px;
+      margin-top:16px;
+      color:var(--green);
+      font-size:.95rem;
+    }
+
+    .right-pane{
+      padding:34px 28px 30px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .selected-label{
+      color:var(--gold);
+      font-size:.95rem;
+      text-transform:uppercase;
+      letter-spacing:.4px;
+    }
+
+    .selected-name{
+      font-size:clamp(2rem, 3.4vw, 3rem);
+      font-weight:800;
+      line-height:1.05;
+      margin-top:8px;
+    }
+
+    .description-box{
+      margin-top:auto;
+    }
+
+    .description-box p{
+      font-size:1.08rem;
+      line-height:1.65;
+      color:var(--white);
+      max-width:520px;
+    }
+
+    .note{
+      margin-top:22px;
+      color:var(--muted);
+      font-size:.92rem;
+      line-height:1.5;
+    }
+
+    @media (max-width: 860px){
+      .content{
+        grid-template-columns:1fr;
+      }
+      .left-pane{
+        border-right:none;
+        border-bottom:2px solid var(--green);
+      }
+      .topbar{
+        align-items:flex-start;
+      }
+      .nav-links{
+        justify-content:flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="page">
+    <div class="topbar">
+      <div class="brand-side">
+        <div class="logo-slot">
+          <!-- replace with your real central / titancore logo -->
+          <!-- example: <img src="titancore-logo.png" alt="TitanCore Logo"> -->
+          <div class="logo-fallback">T</div>
+        </div>
+        <div class="main-title">Central Dashboard</div>
+      </div>
 
-<header>
-  <!-- logo optional – remove img if you don’t have one yet -->
-  <img src="assets/titancore-logo.png" alt="logo">
-  <h1>Central&nbsp;Dashboard</h1><div id="clock"></div>
-</header>
+      <div class="nav-links">
+        <button class="company-link active" data-company="central">Central</button>
+        <button class="company-link" data-company="titancore">TitanCore</button>
+        <button class="company-link" data-company="vaultara">Vaultara</button>
+        <button class="company-link" data-company="familyfirst">Family First</button>
+        <button class="company-link" data-company="vitalpath">VitalPath</button>
+        <button class="company-link" data-company="revmotion">RevMotion</button>
+      </div>
+    </div>
 
-<nav>
-  <button data-top="home">Home</button>
-  <button data-top="portfolio">Portfolio Radar</button>
-  <button data-top="tax">Tax Status</button>
-  <button data-top="public">Public Portal</button>
-  <button data-top="agent">Agent Suite</button>
-  <button data-top="vaultara">Vaultara Capital</button>
-  <button data-top="contracts">Contracts</button>
-  <button data-top="omni">Omni System</button>
-  <button data-top="assets">Asset Register</button>
-</nav>
+    <div class="content">
+      <div class="left-pane">
+        <div class="left-subtitle">Secure Login</div>
 
-<!-- ========== FIRST-LAYER PANELS ========== -->
+        <form id="loginForm">
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="name@titancoreholdings.com" required />
+          </div>
 
-<section id="home" class="active">
-  <h2>Welcome</h2><p>Select a module above.</p>
-</section>
+          <div class="field">
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="Password" required />
+          </div>
 
-<section id="portfolio">
-   <h2>Portfolio Radar</h2>
-   <div class="board">
-     <button data-detail="port-kpi">Overall KPI</button>
-     <button data-detail="port-trend">Trend Charts</button>
-   </div>
-   <!-- detail cards -->
-   <div id="port-kpi" class="detail"><h3>Overall KPI</h3><p>TODO – summary cards.</p></div>
-   <div id="port-trend" class="detail"><h3>Trend Charts</h3><p>TODO – revenue &amp; cost graphs.</p></div>
-</section>
+          <button type="submit" class="login-btn">Login</button>
 
-<section id="tax">
-   <h2>Tax Status</h2>
-   <div class="board">
-     <button data-detail="tax-matrix">Jurisdictions Matrix</button>
-     <button data-detail="tax-calendar">Deadline Calendar</button>
-     <button data-detail="tax-docs">Audit-shield Docs</button>
-   </div>
-   <div id="tax-matrix"  class="detail"><h3>Jurisdictions Matrix</h3><p>Placeholder table.</p></div>
-   <div id="tax-calendar" class="detail"><h3>Deadline Calendar</h3><p>Placeholder monthly grid.</p></div>
-   <div id="tax-docs"     class="detail"><h3>Audit-shield Docs</h3><p>Upload &amp; receipts area.</p></div>
-</section>
+          <div class="helper-links">
+            <a href="https://passwordreset.microsoftonline.com/" target="_blank" rel="noopener">Forgot password?</a>
+            <span class="dot">•</span>
+            <a href="mailto:helpdesk@titancoreholdings.com?subject=Need%20help%20with%20dashboard%20email">Forgot email?</a>
+          </div>
 
-<section id="public">
-   <h2>Public Portal</h2>
-   <div class="board">
-     <button data-detail="pub-press">Press Releases</button>
-     <button data-detail="pub-ceo">CEO Message</button>
-   </div>
-   <div id="pub-press" class="detail"><h3>Press Releases</h3><p>List of releases.</p></div>
-   <div id="pub-ceo"   class="detail"><h3>CEO Monthly Message</h3><p>Message preview area.</p></div>
-</section>
+          <div class="message" id="message"></div>
+        </form>
+      </div>
 
-<section id="agent">
-   <h2>Agent Suite</h2>
-   <div class="board">
-     <button data-detail="agent-tasks">Agent Tasks</button>
-     <button data-detail="agent-ai">AI Assistant Tools</button>
-   </div>
-   <div id="agent-tasks" class="detail"><h3>Agent Tasks</h3><p>Kanban coming soon.</p></div>
-   <div id="agent-ai"    class="detail"><h3>AI Assistant Tools</h3><p>Chat / scripts hub.</p></div>
-</section>
+      <div class="right-pane">
+        <div>
+          <div class="selected-label">Selected Dashboard</div>
+          <div class="selected-name" id="selectedName">Central Dashboard</div>
+        </div>
 
-<section id="vaultara">
-   <h2>Vaultara Capital</h2>
-   <div class="board">
-     <button data-detail="vc-intake">Credit / Loan Intake</button>
-     <button data-detail="vc-fees">Fee Schedule</button>
-   </div>
-   <div id="vc-intake" class="detail"><h3>Client Intake</h3><p>Embedded form placeholder.</p></div>
-   <div id="vc-fees"   class="detail"><h3>Fee Schedule</h3><p>$249 credit-repair start fee …</p></div>
-</section>
+        <div class="description-box">
+          <p id="selectedDescription">
+            Multi-company command center for cross-entity finance, reporting, tax oversight, operational review, and executive visibility across the full TitanCore structure.
+          </p>
 
-<section id="contracts">
-   <h2>Contracts</h2>
-   <div class="board">
-     <button data-detail="ctr-list">Contract List</button>
-     <button data-detail="ctr-signer">Signer Console</button>
-   </div>
-   <div id="ctr-list"   class="detail"><h3>Contract List</h3><p>Table placeholder.</p></div>
-   <div id="ctr-signer" class="detail"><h3>Signer Console</h3><p>e-signature placeholder.</p></div>
-</section>
+          <div class="note" id="selectedNote">
+            Sign in to continue to the selected dashboard.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<section id="omni">
-   <h2>Omni System</h2>
-   <div class="board">
-     <button data-detail="omni-ops">Ops Board</button>
-     <button data-detail="omni-alerts">Alerts &amp; Tasks</button>
-   </div>
-   <div id="omni-ops"    class="detail"><h3>Ops Board</h3><p>Route board placeholder.</p></div>
-   <div id="omni-alerts" class="detail"><h3>Alerts &amp; Tasks</h3><p>Live alerts list.</p></div>
-</section>
+  <script>
+    const dashboards = {
+      central: {
+        name: "Central Dashboard",
+        placeholder: "name@titancoreholdings.com",
+        redirect: "central-dashboard.html",
+        description: "Multi-company command center for cross-entity finance, reporting, tax oversight, operational review, and executive visibility across the full TitanCore structure.",
+        note: "Sign in to continue to the selected dashboard."
+      },
+      titancore: {
+        name: "TitanCore Dashboard",
+        placeholder: "name@titancoreholdings.com",
+        redirect: "titancore-dashboard.html",
+        description: "Parent-company dashboard for TitanCore Holdings, used for company-level control, operational approvals, reporting review, and oversight across all internal systems.",
+        note: "Use your company account to enter the TitanCore dashboard."
+      },
+      vaultara: {
+        name: "Vaultara Capital Dashboard",
+        placeholder: "name@vaultaracapital.com",
+        redirect: "vaultara-dashboard.html",
+        description: "Capital and finance dashboard for lending, funding flow, client intake, credit operations, and executive review for Vaultara Capital.",
+        note: "Use your account to enter the Vaultara dashboard."
+      },
+      familyfirst: {
+        name: "Family First Equity Group Dashboard",
+        placeholder: "name@familyfirstequitygroup.com",
+        redirect: "familyfirst-dashboard.html",
+        description: "Real-estate and property operations dashboard for acquisitions, funding, management flow, internal review, and Family First company activity.",
+        note: "Use your account to enter the Family First dashboard."
+      },
+      vitalpath: {
+        name: "VitalPath Care Group Dashboard",
+        placeholder: "name@vitalpathcaregroup.com",
+        redirect: "vitalpath-dashboard.html",
+        description: "Healthcare operations dashboard for VitalPath Care Group, supporting internal oversight, team coordination, reporting, and service management.",
+        note: "Use your account to enter the VitalPath dashboard."
+      },
+      revmotion: {
+        name: "RevMotion Auto & Marine Dashboard",
+        placeholder: "name@revmotionautomarine.com",
+        redirect: "revmotion-dashboard.html",
+        description: "Automotive and marine operations dashboard for RevMotion, focused on workflow, intake, service tracking, reporting, and internal company control.",
+        note: "Use your account to enter the RevMotion dashboard."
+      }
+    };
 
-<section id="assets">
-   <h2>Asset Register</h2>
-   <div class="board">
-     <button data-detail="asset-list">Asset List</button>
-     <button data-detail="asset-add">Add Asset</button>
-   </div>
-   <div id="asset-list" class="detail"><h3>Asset List</h3><p>Inventory table placeholder.</p></div>
-   <div id="asset-add"  class="detail"><h3>Add Asset</h3><p>Form coming soon.</p></div>
-</section>
+    let currentCompany = "central";
 
-<footer>© 2026 TitanCore Holdings – internal use only</footer>
+    const companyLinks = document.querySelectorAll(".company-link");
+    const selectedName = document.getElementById("selectedName");
+    const selectedDescription = document.getElementById("selectedDescription");
+    const selectedNote = document.getElementById("selectedNote");
+    const emailInput = document.getElementById("email");
+    const messageBox = document.getElementById("message");
 
-<script>
-/* live clock */
-const clk=()=>{document.getElementById('clock').textContent=
-  new Date().toLocaleString();};clk();setInterval(clk,1e3);
+    companyLinks.forEach(btn => {
+      btn.addEventListener("click", () => {
+        companyLinks.forEach(link => link.classList.remove("active"));
+        btn.classList.add("active");
 
-/* first-layer nav */
-document.querySelectorAll('nav button').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-    document.getElementById(btn.dataset.top).classList.add('active');
-    window.scrollTo(0,0);
-  });
-});
+        currentCompany = btn.dataset.company;
+        const current = dashboards[currentCompany];
 
-/* second-layer detail open/close */
-document.querySelectorAll('.board button').forEach(b=>{
-  b.addEventListener('click',()=>{
-    const sec=b.closest('section');
-    sec.querySelectorAll('.detail').forEach(d=>d.style.display='none');
-    const panel=sec.querySelector('#'+b.dataset.detail);
-    if(panel) panel.style.display='block';
-  });
-});
-</script>
+        selectedName.textContent = current.name;
+        selectedDescription.textContent = current.description;
+        selectedNote.textContent = current.note;
+        emailInput.placeholder = current.placeholder;
+        messageBox.textContent = "";
+      });
+    });
 
+    document.getElementById("loginForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const email = emailInput.value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if(!email || !password){
+        messageBox.textContent = "Enter your email and password.";
+        return;
+      }
+
+      messageBox.textContent = "Opening " + dashboards[currentCompany].name + "...";
+
+      setTimeout(() => {
+        window.location.href = dashboards[currentCompany].redirect;
+      }, 500);
+    });
+  </script>
 </body>
 </html>
