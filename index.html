@@ -5,227 +5,239 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Central Dashboard Login</title>
   <style>
-    :root{
-      --bg:#000000;
-      --panel:#060606;
-      --green:#18c25c;
-      --gold:#d4af37;
-      --white:#ffffff;
-      --muted:#bdbdbd;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-      font-family:Arial, Helvetica, sans-serif;
+    body {
+      background: #050505;
+      font-family: Arial, sans-serif;
+      color: #ffffff;
+      padding: 14px;
     }
 
-    body{
-      background:var(--bg);
-      color:var(--white);
-      min-height:100vh;
-      padding:20px 14px;
+    .shell {
+      width: 100%;
+      max-width: 1300px;
+      margin: 0 auto;
+      border: 2px solid #c8a646;
+      border-radius: 28px;
+      overflow: hidden;
+      background: #000000;
     }
 
-    .page{
-      width:min(1220px, 100%);
-      margin:0 auto;
+    .top-title {
+      width: 100%;
+      text-align: center;
+      padding: 34px 18px 28px;
+      font-size: clamp(34px, 6vw, 72px);
+      font-weight: 800;
+      line-height: 1.08;
+      color: #16b54a;
+      background: #000000;
+      border-bottom: 2px solid rgba(200, 166, 70, 0.7);
     }
 
-    .page-title{
-      font-size:clamp(2rem, 4vw, 3.4rem);
-      font-weight:800;
-      color:var(--green);
-      margin-bottom:18px;
+    .bottom-area {
+      display: flex;
+      min-height: 720px;
     }
 
-    .shell{
-      border:2px solid var(--green);
-      border-radius:22px;
-      background:var(--panel);
-      overflow-x:auto;
+    .left-panel {
+      width: 44%;
+      background: #c8a646;
+      padding: 42px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .shell-inner{
-      min-width:820px;
-      display:grid;
-      grid-template-columns:360px 1fr;
-      gap:36px;
-      padding:30px 28px;
-      align-items:center;
+    .login-box {
+      width: 100%;
+      max-width: 320px;
     }
 
-    .left{
-      padding:8px 4px;
+    .field {
+      margin-bottom: 26px;
     }
 
-    .login-title{
-      font-size:2.5rem;
-      font-weight:800;
-      color:var(--gold);
-      margin-bottom:24px;
-      line-height:1;
+    .field label {
+      display: block;
+      font-size: 28px;
+      font-weight: 800;
+      color: #000000;
+      margin-bottom: 14px;
     }
 
-    .field{
-      margin-bottom:18px;
+    .field input {
+      width: 100%;
+      height: 96px;
+      border-radius: 26px;
+      border: 4px solid #111111;
+      background: #f2ecd7;
+      color: #000000;
+      font-size: 22px;
+      font-weight: 700;
+      padding: 0 22px;
+      outline: none;
     }
 
-    .field label{
-      display:block;
-      font-size:1rem;
-      font-weight:700;
-      color:var(--white);
-      margin-bottom:8px;
+    .field input::placeholder {
+      color: #a1a1a1;
+      font-weight: 700;
     }
 
-    .field input{
-      width:100%;
-      padding:16px 14px;
-      border:2px solid var(--green);
-      border-radius:16px;
-      background:#000;
-      color:#fff;
-      font-size:1rem;
-      outline:none;
+    .login-btn {
+      width: 100%;
+      height: 110px;
+      border: none;
+      border-radius: 28px;
+      background: #1fb14b;
+      color: #ffffff;
+      font-size: 34px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 10px;
     }
 
-    .field input::placeholder{
-      color:#7b7b7b;
+    .right-panel {
+      width: 56%;
+      background: #000000;
+      border-left: 2px solid rgba(200, 166, 70, 0.7);
+      padding: 34px 28px;
+      display: flex;
+      align-items: center;
     }
 
-    .field input:focus{
-      border-color:var(--gold);
+    .definition {
+      width: 100%;
+      color: #ffffff;
+      font-size: 24px;
+      line-height: 1.8;
+      font-weight: 500;
     }
 
-    .login-btn{
-      width:100%;
-      margin-top:8px;
-      padding:17px 14px;
-      border:none;
-      border-radius:999px;
-      background:var(--gold);
-      color:#000;
-      font-size:1.08rem;
-      font-weight:800;
-      cursor:pointer;
+    .definition p {
+      margin-bottom: 28px;
     }
 
-    .login-btn:hover{
-      background:var(--green);
-      color:#000;
-    }
+    @media (max-width: 900px) {
+      body {
+        padding: 8px;
+      }
 
-    .helper{
-      margin-top:16px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      font-size:.95rem;
-    }
+      .shell {
+        border-radius: 22px;
+      }
 
-    .helper a{
-      color:var(--gold);
-      text-decoration:none;
-    }
+      .top-title {
+        padding: 26px 10px 22px;
+        font-size: 40px;
+      }
 
-    .helper a:hover{
-      text-decoration:underline;
-    }
+      .bottom-area {
+        min-height: auto;
+      }
 
-    .status{
-      min-height:22px;
-      margin-top:12px;
-      color:var(--green);
-      font-size:.92rem;
-    }
+      .left-panel {
+        width: 44%;
+        padding: 18px 12px;
+      }
 
-    .right{
-      padding:8px 4px;
-    }
+      .right-panel {
+        width: 56%;
+        padding: 18px 14px;
+      }
 
-    .desc{
-      font-size:1.12rem;
-      line-height:1.8;
-      color:var(--white);
-      max-width:620px;
-    }
+      .field {
+        margin-bottom: 18px;
+      }
 
-    .desc .note{
-      display:block;
-      margin-top:20px;
-      color:var(--muted);
-      font-size:.98rem;
-      line-height:1.6;
+      .field label {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .field input {
+        height: 60px;
+        font-size: 16px;
+        border-radius: 18px;
+        border-width: 3px;
+        padding: 0 14px;
+      }
+
+      .login-btn {
+        height: 78px;
+        font-size: 24px;
+        border-radius: 22px;
+      }
+
+      .definition {
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .definition p {
+        margin-bottom: 18px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="page-title">Central Dashboard</div>
+  <div class="shell">
+    <div class="top-title">Central Dashboard</div>
 
-    <div class="shell">
-      <div class="shell-inner">
-        <div class="left">
-          <div class="login-title">Login</div>
-
+    <div class="bottom-area">
+      <div class="left-panel">
+        <div class="login-box">
           <form id="loginForm">
             <div class="field">
               <label for="email">Email</label>
-              <input id="email" type="email" placeholder="name@titancoreholdings.com" required>
+              <input id="email" type="email" placeholder="Enter email" required />
             </div>
 
             <div class="field">
               <label for="password">Password</label>
-              <input id="password" type="password" placeholder="Password" required>
+              <input id="password" type="password" placeholder="Enter password" required />
             </div>
 
             <button type="submit" class="login-btn">Login</button>
-
-            <div class="helper">
-              <a href="https://passwordreset.microsoftonline.com/" target="_blank" rel="noopener">Forgot password?</a>
-              <span>•</span>
-              <a href="mailto:helpdesk@titancoreholdings.com?subject=Need%20help%20with%20dashboard%20email">Forgot email?</a>
-            </div>
-
-            <div class="status" id="status"></div>
           </form>
         </div>
+      </div>
 
-        <div class="right">
-          <div class="desc">
-            Multi-company command center for reporting, oversight, tax review,
-            operational review, finance visibility, and executive access across
-            the full TitanCore network.
+      <div class="right-panel">
+        <div class="definition">
+          <p>
+            The Central Dashboard is the main command center for the TitanCore network.
+            It is the highest internal dashboard for leadership oversight, company
+            visibility, executive workflow, reporting review, structure control, and
+            parent-level coordination across all connected companies.
+          </p>
 
-            <span class="note">
-              Sign in to continue to the Central Dashboard.
-            </span>
-          </div>
+          <p>
+            This secure access page supports authorized entry for the Mantle of Seven,
+            General Leadership, and approved internal users who need to move through
+            leadership dashboards, company dashboards, departments, systems, approvals,
+            reporting, finance flow, and central oversight operations.
+          </p>
+
+          <p>
+            From the Central Dashboard, authorized users can view the TitanCore structure,
+            move into connected companies, review major activity, and oversee the internal
+            system from one protected control point.
+          </p>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    document.getElementById("loginForm").addEventListener("submit", function(e){
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
       e.preventDefault();
-
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const status = document.getElementById("status");
-
-      if(!email || !password){
-        status.textContent = "Enter your email and password.";
-        return;
-      }
-
-      status.textContent = "Opening dashboard...";
-
-      setTimeout(function(){
-        window.location.href = "central-dashboard.html";
-      }, 300);
+      window.location.href = "./central-dashboard.html";
     });
   </script>
 </body>
